@@ -47,7 +47,7 @@ def create_merge_sql(table_name: str,
         s3_key,
         file_format_name,
         pk_merge_condition,
-        ', '.join(['{0}=s.{0}'.format(c['name']) for c in columns]),
+        ', '.join(['{0}=coalesce(s.{0},t.{0})'.format(c['name']) for c in columns]),
         ', '.join([c['name'] for c in columns]),
         ', '.join(['s.{}'.format(c['name']) for c in columns]))
 
